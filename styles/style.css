@@ -1,3 +1,26 @@
+:root {
+--fctx: 50%;
+--fcty: 0;
+--fcscale: 1;
+--fcrx: 0deg;
+--fcry: 0deg;
+--bctx: 50%;
+--bcty: 0;
+--bcscale: 1;
+--bcrx: 0deg;
+--bcry: 0deg;
+--p1tx: 50%;
+--p1ty: 0;
+--p1scale: 1;
+--p1rx: 0deg;
+--p1ry: 0deg;
+--p2tx: 50%;
+--p2ty: 0;
+--p2scale: 1;
+--p2rx: 0deg;
+--p2ry: 0deg;
+}
+
 html {
     font-size: 16px;
     font-weight: 300;
@@ -32,8 +55,10 @@ body {
   top:0;
   left:0;
   transform-origin: left;
-  transform: translateX(50%);
   z-index: 20;
+}
+.page.first {
+  transform: translate(var(--p1tx), var(--p1ty));
 }
 .pageFront {
   width: 100%;
@@ -67,11 +92,10 @@ body {
   margin: 0;
   top: 0;
   left: 0;
-  /*transform-origin: left;
-  transform: translateX(50%);*/
+  transform-origin: left;
+  transform: translateX(50%) translateY(0%);
 }
 .frontCoverContainer {
-  transform: matrix(1, 0, 0, 1, 0, 0);
   z-index: 999;
 }
 

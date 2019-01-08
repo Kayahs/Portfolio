@@ -1,10 +1,13 @@
 $(document).ready(function() {
-	$('.book').on('click', (event) => {
-		var frontCover = $('.frontCoverContainer');
-		var frontCoverRight = $('.frontCoverRight');
-		var backCover = $('.backCoverContainer');
-		var book = $('.book');
-    var pages = $('.page');
+  var frontCover = $('.frontCoverContainer');
+  var frontCoverRight = $('.frontCoverRight');
+  var backCover = $('.backCoverContainer');
+  var book = $('.book');
+  var pages = $('.page');
+/*	translateObject(frontCover, "50%");
+  translateObject(backCover, "50%");*/
+  $('.book').on('click', (event) => {
+		frontCover.addClass("frontCoverFlip");
     pages.addClass("backCoverDuringFlip");
     // console.log(event);
     // console.log(event.target.classList);
@@ -12,7 +15,7 @@ $(document).ready(function() {
     // console.log(currentTarget);
     var findTarget = getObject(event.target.classList);
     // console.log(findContainer(findTarget));
-    translateMatrix(getTransformMatrix(findContainer(currentTarget)), "50%");
+    // translateObject(findContainer(currentTarget), "50%");
 
 		backCover.addClass("shiftRight");
 	});
@@ -67,11 +70,23 @@ $(document).ready(function() {
     return baseMatrix;
   }
 
-  function rotateMatrix(matrix, deg){ 
+  function rotateObjectX(object, deg){ 
   }
 
-  function translateMatrix(matrix, percent) {
-    var pvalue = parseFloat(percent.replace('%',''))/100;
-    console.log(pvalue);
+  function translateObject(object, Xpercent, Ypercent = "0%") {
+    var matrix = getTransformMatrix(object);
+    var xper = parseFloat(Xpercent.replace('%',''))/100;
+    var yper = parseFloat(Ypercent.replace('%',''))/100;
+    var dx = object.outerWidth()*xper;
+    var dy = object.outerHeight()*yper;
+    matrix.translateX += dx;
+    matrix.translateY += dy;
+    object.css("transform", "matrix(" + 
+      matrix.scaleX + ", " + 
+      matrix.skewX + ", " + 
+      matrix.skewY + ", " + 
+      matrix.scaleY + ", " +
+      matrix.translateX + ", " +
+      matrix.translateY + ")" );
   }
 });
